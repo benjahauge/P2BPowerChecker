@@ -41,7 +41,7 @@ namespace P2BPowerChecker
             if (e.State == BatteryState.Discharging)
             {
                 string message = "Server har mistet strøm";
-                string number = "+4551328197";
+                string number = "+4512121212";
                 var smsMessenger = CrossMessaging.Current.SmsMessenger;
                 if (smsMessenger.CanSendSmsInBackground)
                 {
