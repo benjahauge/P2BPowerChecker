@@ -18,8 +18,7 @@ namespace P2BPowerChecker
         public MainPage()
         {
             InitializeComponent();
-            SetBackground(Battery.ChargeLevel,
-            Battery.State == BatteryState.Charging);
+            ShowBatteryStatus(Battery.State == BatteryState.Charging);
         }
 
         protected override void OnAppearing()
@@ -34,41 +33,60 @@ namespace P2BPowerChecker
             Battery.BatteryInfoChanged -= Battery_BatteryInfoChanged;
         }
 
-        private async void Battery_BatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
+        private void Battery_BatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
         {
-            SetBackground(e.ChargeLevel, e.State == BatteryState.Charging);
-
+            ShowBatteryStatus(e.State == BatteryState.Charging);
             if (e.State == BatteryState.Discharging)
             {
-                string message = "Server har mistet strøm";
-                string number = "+4512121212";
+                //string phoneNumber = Preferences.Get(nameof(PhoneNumber.Text), PhoneNumber.Text);
+                //string smsMessage = Preferences.Get(nameof(SMSMessage.Text), SMSMessage.Text);
+
+                //bool hasPhoneNumberKey = Preferences.ContainsKey(nameof(SavedPhoneNumber));
+                //bool hasSmsMessageKey = Preferences.ContainsKey(nameof(SavedSMSMessage));
+
                 var smsMessenger = CrossMessaging.Current.SmsMessenger;
                 if (smsMessenger.CanSendSmsInBackground)
                 {
-                    smsMessenger.SendSmsInBackground(number, message);
+                    smsMessenger.SendSmsInBackground(SavedPhoneNumber, SavedSMSMessage);
                 }
             }
         }
 
-        private void SetBackground(double level, bool charging)
+        //string phoneNumber = Preferences.Get(nameof(SavedPhoneNumber), SavedPhoneNumber);
+        public string SavedPhoneNumber
         {
-            Color? color = null;
+            get => Preferences.Get(nameof(SavedPhoneNumber), PhoneNumber.Text);
+            set
+            {
+                //phoneNumber = value;
+                Preferences.Set(nameof(SavedPhoneNumber), value);
+            }
+        }
+
+        public string SavedSMSMessage
+        {
+            get => Preferences.Get(nameof(SavedSMSMessage), SMSMessage.Text);
+            set
+            {
+                Preferences.Set(nameof(SavedSMSMessage), value);
+            }
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Preferences.Set("key_phone_number", SavedPhoneNumber);
+            Preferences.Set("key_sms_message", SavedSMSMessage);
+
+            //string number = Preferences.Get("key_phone_number", PhoneNumber.Text);
+            //string message = Preferences.Get("key_sms_message", SMSMessage.Text);
+
+            //ShowPhoneNumber.Text = number;
+            //ShowSMSMessage.Text = message;
+        }
+
+        private void ShowBatteryStatus(bool charging)
+        {
             var status = charging ? "Charging" : "Not charging";
-
-            if (level > .5f)
-            {
-                color = Color.Green.MultiplyAlpha(level);
-            }
-            else if (level > .1f)
-            {
-                color = Color.Yellow.MultiplyAlpha(1d - level);
-            }
-            else
-            {
-                color = Color.Red.MultiplyAlpha(1d - level);
-            }
-
-            BackgroundColor = color.Value;
             LabelBatteryLevel.Text = status;
             BatteryMessage.Text = "Current status is:";
         }

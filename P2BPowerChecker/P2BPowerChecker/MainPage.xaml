@@ -7,8 +7,17 @@
         <Frame BackgroundColor="#001B8A" Padding="24" CornerRadius="0">
             <Label Text="Place2Book's Power Status App" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
+
+        <Entry Text="{Binding SavedPhoneNumber}" Placeholder="Phone number:" x:Name="PhoneNumber"/>
+        <Entry Text="{Binding SavedSMSMessage}" Placeholder="Message:" x:Name="SMSMessage"/>
+        <Button Text="Add" Clicked="Button_Clicked" />
+
+
+        <Label x:Name="ShowPhoneNumber" TextColor="Black" />
+        <Label x:Name="ShowSMSMessage" TextColor="Black" />
+        
+        
         <Label Text="Sends a SMS if the app stops charging" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="--------------------------------------------------" FontSize="Title" Padding="30,10,30,10"/>
 
         <Label x:Name="BatteryMessage"
                 VerticalOptions="Center" 
