@@ -13,7 +13,7 @@
             <Label Text="Place2Book's Power Status App" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
 
-        <CollectionView x:Name="collectionView">
+        <!--<CollectionView x:Name="collectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <SwipeView>
@@ -46,17 +46,17 @@
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
+        </CollectionView>-->
+        <Label Text="" VerticalOptions="Fill"></Label>
 
         <Label x:Name="BatteryMessage"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
                 FontSize="20"
                 TextColor="Black" />
 
         <Label x:Name="LabelBatteryLevel"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center"
                 FontSize="20"
                 TextColor="Black" />
     </StackLayout>

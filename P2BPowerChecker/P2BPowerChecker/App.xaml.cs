@@ -25,7 +25,7 @@ namespace P2BPowerChecker
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new MenuPage();
         }
 
         protected override void OnStart()

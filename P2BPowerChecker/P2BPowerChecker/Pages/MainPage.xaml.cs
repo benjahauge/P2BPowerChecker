@@ -1,6 +1,7 @@
 ﻿using Android;
 using Android.Content.PM;
 using Java.Lang;
+using Java.Util.Logging;
 using P2BPowerChecker.Data;
 using P2BPowerChecker.Models;
 using Plugin.Messaging;
@@ -30,7 +31,7 @@ namespace P2BPowerChecker
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            collectionView.ItemsSource = await App.Database.GetItemsAsync();
+            //collectionView.ItemsSource = await App.Database.GetItemsAsync();
             Battery.BatteryInfoChanged += Battery_BatteryInfoChanged;
         }
 
@@ -44,24 +45,25 @@ namespace P2BPowerChecker
         {
             await Navigation.PushAsync(new AddPage());
         }
-        async void SwipeItem_Invoked_Edit(object sender, EventArgs e)
-        {
-            var item = sender as SwipeItem;
-            var pcm = item.CommandParameter as PCMessenger;
-            await Navigation.PushAsync(new AddPage(pcm));
-        }
 
-        async void SwipeItem_Invoked_Delete(object sender, EventArgs e)
-        {
-            var item = sender as SwipeItem;
-            var pcm = item.CommandParameter as PCMessenger;
-            var result = await DisplayAlert("Delete", $"Delete {pcm.PhoneNumber} from the database?", "Yes", "No");
-            if (result)
-            {
-                await App.Database.DeleteItemAsync(pcm);
-            }
-            collectionView.ItemsSource = await App.Database.GetItemsAsync();
-        }
+        //async void SwipeItem_Invoked_Edit(object sender, EventArgs e)
+        //{
+        //    var item = sender as SwipeItem;
+        //    var pcm = item.CommandParameter as PCMessenger;
+        //    await Navigation.PushAsync(new AddPage(pcm));
+        //}
+
+        //async void SwipeItem_Invoked_Delete(object sender, EventArgs e)
+        //{
+        //    var item = sender as SwipeItem;
+        //    var pcm = item.CommandParameter as PCMessenger;
+        //    var result = await DisplayAlert("Delete", $"Delete {pcm.PhoneNumber} from the database?", "Yes", "No");
+        //    if (result)
+        //    {
+        //        await App.Database.DeleteItemAsync(pcm);
+        //    }
+        //    collectionView.ItemsSource = await App.Database.GetItemsAsync();
+        //}
 
         private void Battery_BatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
         {
@@ -83,6 +85,16 @@ namespace P2BPowerChecker
         private void ShowBatteryStatus(bool charging)
         {
             var status = charging ? "Charging" : "Not charging";
+
+            if (status == "Not charging")
+            {
+                BackgroundColor = Color.Red;
+            }
+            else
+            {
+                BackgroundColor = Color.White;
+            }
+            
             LabelBatteryLevel.Text = status;
             BatteryMessage.Text = "Current status is:";
         }
