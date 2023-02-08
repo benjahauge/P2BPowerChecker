@@ -3,21 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="P2BPowerChecker.MainPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                     Clicked="ToolbarAdd_Clicked"/>
+    </ContentPage.ToolbarItems>
+
     <StackLayout>
         <Frame BackgroundColor="#001B8A" Padding="24" CornerRadius="0">
             <Label Text="Place2Book's Power Status App" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
 
-        <Entry Text="{Binding SavedPhoneNumber}" Placeholder="Phone number:" x:Name="PhoneNumber"/>
-        <Entry Text="{Binding SavedSMSMessage}" Placeholder="Message:" x:Name="SMSMessage"/>
-        <Button Text="Add" Clicked="Button_Clicked" />
-
-
-        <Label x:Name="ShowPhoneNumber" TextColor="Black" />
-        <Label x:Name="ShowSMSMessage" TextColor="Black" />
-        
-        
-        <Label Text="Sends a SMS if the app stops charging" FontSize="Title" Padding="30,10,30,10"/>
+        <CollectionView x:Name="collectionView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Edit"
+                                           BackgroundColor="LightBlue"
+                                           CommandParameter="{Binding .}"
+                                           Invoked="SwipeItem_Invoked_Edit"/>
+                                <SwipeItem Text="Delete"
+                                           BackgroundColor="Red"
+                                           CommandParameter="{Binding .}"
+                                           Invoked="SwipeItem_Invoked_Delete"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding PhoneNumber}" 
+                               Grid.Row="0" Grid.Column="1"
+                               FontSize="20"
+                               FontAttributes="Bold"/>
+                            <Label Text="{Binding SmsMessage}"
+                               Grid.Row="1" Grid.Column="1"/>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
         <Label x:Name="BatteryMessage"
                 VerticalOptions="Center" 
@@ -27,7 +56,7 @@
 
         <Label x:Name="LabelBatteryLevel"
                 VerticalOptions="Center" 
-                HorizontalOptions="CenterAndExpand"
+                HorizontalOptions="Center"
                 FontSize="20"
                 TextColor="Black" />
     </StackLayout>
