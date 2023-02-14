@@ -1,5 +1,32 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<UseMaui>true</UseMaui>
+		<TargetFramework>net6.0-ios</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+	</PropertyGroup>
+
+	<!-- <ItemGroup>
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    </ItemGroup> -->
+
+	<ItemGroup>
+		<ProjectReference Include="..\P2BPowerChecker\P2BPowerChecker.csproj">
+			<Project>{1D96830A-C9BC-41B7-9FCB-A39245820F97}</Project>
+			<Name>P2BPowerChecker</Name>
+		</ProjectReference>
+	</ItemGroup>
+</Project>
+
+<!--<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<UseMaui>true</UseMaui>
+		<TargetFramework>net6.0-ios</TargetFramework>
+		<OutputType>Exe</OutputType>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -133,4 +160,4 @@
       <Name>P2BPowerChecker</Name>
     </ProjectReference>
   </ItemGroup>
-</Project>
+</Project>-->
