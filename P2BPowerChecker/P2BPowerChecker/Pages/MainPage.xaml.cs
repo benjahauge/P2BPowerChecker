@@ -15,7 +15,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
-using Xamarin.Forms;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
 using static Android.Provider.ContactsContract.CommonDataKinds;
 
 namespace P2BPowerChecker

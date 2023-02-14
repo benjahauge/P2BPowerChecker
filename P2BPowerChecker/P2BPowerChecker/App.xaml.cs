@@ -1,8 +1,9 @@
 ﻿using P2BPowerChecker.Data;
 using System;
 using System.IO;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
 
 namespace P2BPowerChecker
 {
